@@ -5,7 +5,7 @@ var Y = 0;
 var Widget;
 var square;
 var etoiles = [];
-var load = {masque:"masque"};
+var load = {masque:"masque",texte0:"texte0",texte1:"texte1",texte2:"texte2",texte3:"texte3"};
 var lettres = [];
 var constellations = [];
 var slide = 0;
@@ -14,6 +14,7 @@ var position = [0,0];
 var texte = [["texte1",-300,0,0,1],["texte2",-500,0,0,1]];
 var bru = 2;
 var numbers = [];
+var n = 0;
 
 // programme
 
@@ -29,7 +30,7 @@ function resize(){
 }
 
 function chargement(){
-    var list = ["masque"];
+    var list = ["masque","texte0","texte1","texte2","texte3"];
     var n = list.length;
     list.forEach(
         function (e){
@@ -153,6 +154,7 @@ function touching(x,y){
 }
 
 function slideA(){
+    n = 0;
     var f = function(t) {
         drawA(t);
         if (slide == 1) slideB();
@@ -163,6 +165,25 @@ function slideA(){
 
 function drawA(t) {
     drawFond();
+    var nTr = 3;
+    for (var i = 0;i<4;i++){
+        for (var j = 0;j<nTr;j++){
+            ctx.globalAlpha = 1 - j/nTr;
+            ctx.drawImage(load[("texte"+i)],ligne(n-j*6,i)-200,(H/5)*(i+1)-100);
+        }
+    }
+    ctx.globalAlpha = 1;
+    n += 1;
+}
+
+function ligne(n,i){
+    if (n > 50){
+        return W/2;
+    }
+    else {
+        var N = (i%2)*2-1;
+        return (W/2 - N*(W/2+200)) + (N*(W/2+200))/50*n;
+    }
 }
 
 function slideB(){
