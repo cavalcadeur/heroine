@@ -75,6 +75,7 @@ function start(){
 function touching(x,y){
     if (slide == 0){
         event = 1;
+        n = 0;
         position = [0,H/2];
     }
     else if (slide == 1){
@@ -165,11 +166,22 @@ function slideA(){
 
 function drawA(t) {
     drawFond();
-    var nTr = 3;
-    for (var i = 0;i<4;i++){
-        for (var j = 0;j<nTr;j++){
-            ctx.globalAlpha = 1 - j/nTr;
-            ctx.drawImage(load[("texte"+i)],ligne(n-j*6,i)-200,(H/5)*(i+1)-100);
+    if (event == 0){
+        var nTr = 3;
+        for (var i = 0;i<4;i++){
+            for (var j = 0;j<nTr;j++){
+                ctx.globalAlpha = 1 - j/nTr;
+                ctx.drawImage(load[("texte"+i)],ligne(n-j*6,i)-200,(H/5)*(i+1)-100);
+            }
+        }
+    }
+    else {
+        var nTr = 3;
+        for (var i = 0;i<4;i++){
+            for (var j = 0;j<nTr;j++){
+                ctx.globalAlpha = 1 - j/nTr;
+                ctx.drawImage(load[("texte"+i)],courbeX(n-j*3,i)-200,(H/5)*(i+1) + courbeY(n-j*3,i)-100);
+            }
         }
     }
     ctx.globalAlpha = 1;
@@ -184,6 +196,16 @@ function ligne(n,i){
         var N = (i%2)*2-1;
         return (W/2 - N*(W/2+200)) + (N*(W/2+200))/50*n;
     }
+}
+
+function courbeX(n,i){
+    var N = (i%2)*2-1;
+    return W/2 + N*n*5;
+}
+
+function courbeY(n,i){
+    var Y = n*n+-20*n;
+    return Y;
 }
 
 function slideB(){
