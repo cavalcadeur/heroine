@@ -5,7 +5,7 @@ var Y = 0;
 var Widget;
 var square;
 var etoiles = [];
-var load = {masque:"masque",texte0:"texte0",texte1:"texte1",texte2:"texte2",texte3:"texte3"};
+var load = {masque:"masque",texte0:"texte0",texte1:"texte1",texte2:"texte2",texte3:"texte3",titre0:"titre0",titre1:"titre1"};
 var lettres = [];
 var constellations = [];
 var slide = 0;
@@ -30,7 +30,7 @@ function resize(){
 }
 
 function chargement(){
-    var list = ["masque","texte0","texte1","texte2","texte3"];
+    var list = ["masque","texte0","texte1","texte2","texte3","titre0","titre1"];
     var n = list.length;
     list.forEach(
         function (e){
@@ -183,6 +183,9 @@ function drawA(t) {
                 ctx.drawImage(load[("texte"+i)],courbeX(n-j*3,i)-200,(H/5)*(i+1) + courbeY(n-j*3,i)-100);
             }
         }
+        if (n >= 60){
+            slide = 1;
+        }
     }
     ctx.globalAlpha = 1;
     n += 1;
@@ -204,11 +207,12 @@ function courbeX(n,i){
 }
 
 function courbeY(n,i){
-    var Y = n*n+-20*n;
+    var Y = n*n+-25*n;
     return Y;
 }
 
 function slideB(){
+    alert("Comment faire une bonne heroïne tragique de la mythologie ???");
     var f = function(t) {
         drawB(t);
         if (slide == 2) slideC();
@@ -219,32 +223,8 @@ function slideB(){
 
 function drawB(){
     drawFond();
-    texte.forEach(
-        function (e,i){
-            ctx.drawImage(load[e[0]],W/2-400,e[1]-200);
-            if (e[4] == 1){
-                e[1] += e[2];
-                e[2] += 1;
-                if (e[1] >= e[3]) {
-                    e[2] = (e[2]/2)*-1;
-                    if (e[2] > -1) {
-                        e[4] = 0;
-                        bru -= 1;
-                        if (bru == 0) alert("Comment l'astronomie a bouleversé la vision du monde dans l'antiquité ???");
-                    }
-                }
-            }
-            else if (event == 2){
-                e[1] += e[2];
-                e[2] += 1;
-                position[0] -= i;
-                if (position[0] == 0){
-                    disalert();
-                    slide = 2;
-                }
-            }
-        }
-    );
+    ctx.drawImage(load.titre0,W/2-250,H/2-80);
+    ctx.drawImage(load.titre1,W/2-250,H/4*3-80);
 }
 
 function slideC(){

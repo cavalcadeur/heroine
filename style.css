@@ -13,7 +13,7 @@ body {
     transition: .5s transform;
     background-color: rgba(0,0,0,0);
 	opacity:0.9;
-	color: rgb(0,0,0);	
+	color: rgb(255,255,255);	
     font-weight: normal;
     font-size: 400%;
 	font-style: oblique;
