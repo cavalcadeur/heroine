@@ -96,6 +96,7 @@ function touching(x,y){
     }
     else if (slide == 5){
         slide = 6;
+        position = [[100,H/4,100,H/2,0],[W/4+50,H/2,W/4+50,H/4,-200],[W/2,H/2,W/2,H/4,-300],[100,H/2,W/4+50,H/2,-100],[W/4+50,H/2,W/2,H/2,-200],[W/2,H/2,W/4*3-50,H/2,-300],[W/4*3-50,H/2,W-100,H/2,-400],[W/4*3 + W/8 - 75,H/2,W/4*3 + W/8 - 75,H/4*3,-450],[W/4-50,H/2,W/4-70,H/2-20,-550],[W/4-50,H/2,W/4-70,H/2+20,-550],[W/2-100,H/2,W/2-120,H/2-20,-550],[W/2-100,H/2,W/2-120,H/2+20,-550],[W/4*3-150,H/2,W/4*3-170,H/2-20,-550],[W/4*3-150,H/2,W/4*3-170,H/2+20,-550]];
     }
     else if (slide == 6){
         if (event == 11){
@@ -285,7 +286,7 @@ function drawF(){
 }
 
 function slideG(){
-    alert("II) Le cas des comètes.");
+    alert("Berenice");
     position = [W/2,H/2,0,0,0];
     constellations = [];
     var f = function(t) {
@@ -298,54 +299,10 @@ function slideG(){
 
 function drawG(){
     drawFond();
-    constellations.forEach(
-        function(e,i){
-            if (e.t == 0){
-                constellations.splice(i,1);
-            }
-            else{
-                ctx.globalAlpha = e.t / 40;
-                ctx.save();
-                ctx.translate(e.x,e.y);
-                ctx.rotate(e.r);
-                ctx.drawImage(load.com,-20,-20);
-                ctx.restore();
-                constellations[i].r += 0.3;
-                constellations[i].t -= 1;
-            }
-        }
-    );
-    ctx.save();
-    ctx.translate(position[0],position[1]);
-    ctx.rotate(position[2]);
-    ctx.drawImage(load.comete,-52,-52);
-    ctx.restore();
-    position[3] += rnd(3) - 1;
-    if (position[3] > 5) position[3] = 5;
-    if (position[3] < -5) position[3] = -5;
-    position[2] += position[3]/40;
-    position[0] += Math.cos(position[2])*10;
-    position[1] += Math.sin(position[2])*10;
-    if (position[1] > H+52){
-        position[3] = 0;
-        position[2] = -Math.PI/2;
-    }
-    if (position[1] < 0){
-        position[3] = 0;
-        position[2] = Math.PI/2;
-    }
-    if (position[0] > W+52){
-        position[3] = 0;
-        position[2] = Math.PI;
-    }
-    if (position[0] < 0){
-        position[3] = 0;
-        position[2] = 0;
-    }
-    position[4] += 1;
-    if (position[4]%2 == 0) {
-        constellations.push({x:position[0],y:position[1],r:rnd(10)/10,t:40});
-    }
+    drawGenea();
+    ctx.drawImage(load.antiochus,0,H/2-50,200,100);
+    ctx.drawImage(load.berenice,W/2-100,H/2-50,200,100);
+    ctx.drawImage(load.titus,W-200,H/2-50,200,100);
 }
 
 function slideH(){
