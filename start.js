@@ -5,7 +5,7 @@ var Y = 0;
 var Widget;
 var square;
 var etoiles = [];
-var load = {masque:"masque",texte0:"texte0",texte1:"texte1",texte2:"texte2",texte3:"texte3",titre0:"titre0",titre1:"titre1",didon:"didon",achille:"achille",agamemnon:"agamemnon",amazone:"amazone",andromaque:"andromaque",antigone:"antigone",antiochus:"antiochus",ariane:"ariane",astyanax:"astyanax",berenice:"berenice",creon:"creon",didonImg:"didonImg",enee:"enee",hector:"hector",hemon:"hemon",hermione:"hermione",hyppolite:"hyppolite",jocaste:"jocaste",minos:"minos",oedipe:"oedipe",oreste:"oreste",pasiphae:"pasiphae",phedre:"phedre",pygmalion:"pygmalion",pyrrhus:"pyrrhus",roiTyr:"roiTyr",thesee:"thesee",titus:"titus"};
+var load = {masque:"masque",texte0:"texte0",texte1:"texte1",texte2:"texte2",texte3:"texte3",titre0:"titre0",titre1:"titre1",didon:"didon",achille:"achille",agamemnon:"agamemnon",amazone:"amazone",andromaque:"andromaque",antigone:"antigone",antiochus:"antiochus",ariane:"ariane",astyanax:"astyanax",berenice:"berenice",creon:"creon",didonImg:"didonImg",enee:"enee",hector:"hector",hemon:"hemon",hermione:"hermione",hyppolite:"hyppolite",jocaste:"jocaste",minos:"minos",oedipe:"oedipe",oreste:"oreste",pasiphae:"pasiphae",phedre:"phedre",pygmalion:"pygmalion",pyrrhus:"pyrrhus",roiTyr:"roiTyr",thesee:"thesee",titus:"titus",helene:"helene"};
 var lettres = [];
 var constellations = [];
 var slide = 0;
@@ -30,7 +30,7 @@ function resize(){
 }
 
 function chargement(){
-    var list = ["masque","texte0","texte1","texte2","texte3","titre0","titre1","achille","agamemnon","ariane","astyanax","amazone","andromaque","antiochus","antigone","berenice","creon","didon","enee","didonImg","hector","hemon","hermione","hyppolite","jocaste","minos","oedipe","oreste","pasiphae","phedre","pygmalion","pyrrhus","roiTyr","thesee","titus"];
+    var list = ["masque","texte0","texte1","texte2","texte3","titre0","titre1","achille","agamemnon","ariane","astyanax","amazone","andromaque","antiochus","antigone","berenice","creon","didon","enee","didonImg","hector","hemon","hermione","hyppolite","jocaste","minos","oedipe","oreste","pasiphae","phedre","pygmalion","pyrrhus","roiTyr","thesee","titus","helene"];
     var n = list.length;
     list.forEach(
         function (e){
@@ -85,27 +85,17 @@ function touching(x,y){
     }
     else if (slide == 2){
          slide = 3;
-         position = [[W/3,H/3,W/4,H/3*2,0],[W/3,H/3,W/2,H/3*2,0],[W/2,H/3*2,W/4*3,H/3*2,0]]
+        position = [[W/3,H/3,W/4,H/3*2,0],[W/3,H/3,W/2,H/3*2,0],[W/2,H/3*2,W/4*3,H/3*2,0]];
     }
     else if (slide == 3){
-
+        slide = 4;
     }
     else if (slide == 4){
         slide = 5;
+        position = [[100,H/4,100,H/2,0],[W/4+50,H/4,W/4+50,H/2,0],[W/2,H/4,W/2,H/2,0]];
     }
     else if (slide == 5){
-        if (event == 9){
-            event = 10;
-            position[2] = 0;
-            alert("L'école d'Athènes");
-        }
-        else if (event == 10){
-            event = 11;
-            alert("L'école d'Alexandrie");
-        }
-        else if (event == 11){
-            slide = 6;
-        }
+        slide = 6;
     }
     else if (slide == 6){
         if (event == 11){
@@ -223,7 +213,7 @@ function drawC(){
 }
 
 function slideD(){
-    disalert();
+    alert("Didon");
     var f = function(t) {
         drawD(t);
         if (slide == 4) slideE();
@@ -255,13 +245,7 @@ ctx.stroke();
 }
 
 function slideE(){
-    alert("L'école ionienne");
-    position = [];
-    for (var i = 0;i<50;i++){
-        var hh = rnd(600)+W/2-300;
-        var gg = rnd(300);
-        position.push([hh,H/2 -50 + gg,rnd(300)/100,gg]);
-    }
+    alert("Une femme vertueuse");
     var f = function(t) {
         drawE(t);
         if (slide == 5) slideF();
@@ -272,31 +256,10 @@ function slideE(){
 
 function drawE(t){
     drawFond();
-    position.forEach(
-        function(e,i){
-            ctx.globalAlpha = 1 - e[3]/300;
-            ctx.save();
-            ctx.translate(e[0],e[1]);
-            ctx.rotate(e[2]);
-            ctx.drawImage(load.fum,-75,-75);
-            ctx.restore();
-            e[1] += 0.8;
-            e[2] += 0.02;
-            e[3] += 1;
-            e[0] -= (W/2 - e[0])/500;
-            if (e[3] == 300) {
-                var hh = rnd(600)+W/2-300;
-                position[i] = [hh,H/2 - 50 + rnd(200) + (hh-W/2)/10,rnd(300)/100,0];
-            }
-        }
-    );
-    ctx.globalAlpha = 1;
-    ctx.drawImage(load.plan,W/2-300,H/2-175 + Math.sin(t/1000)*8 - 4);
 }
 
 function slideF(){
-    alert("L'école pythagoricienne");
-    position = [W/2,-1];
+    alert("Andromaque");
     var f = function(t) {
         drawF(t);
         if (slide == 6) slideG();
@@ -307,34 +270,15 @@ function slideF(){
 
 function drawF(){
     drawFond();
-    var size = ((W/2 - W/5) - Math.abs(W/2-position[0]))/1500;
-    if (position[1] == 1) {
-        ctx.save();
-        ctx.translate(position[0],H/2);
-        if (event >= 10) {
-            ctx.rotate(position[2]);
-            position[2] += 0.05;
-        }
-        ctx.scale(1-size,1-size);
-        ctx.drawImage(load.terre,-100,-100);
-        ctx.restore();
-    }
-    ctx.drawImage(load.sun,W/2-200,H/2-200);
-    if (position[1] == -1) {
-        ctx.save();
-        ctx.translate(position[0],H/2);
-        if (event >= 10) {
-            ctx.rotate(position[2]);
-            position[2] += 0.05;
-        }
-        ctx.scale(1+size,1+size);
-        ctx.drawImage(load.terre,-100,-100);
-        ctx.restore();
-    }
-    position[0] += position[1]*(15-(Math.abs(W/2 - position[0])/(W/2 - W/5))*8);
-    if (position[0] >= W/5 * 4) position[1] = -1;
-    else if (position[0] <= W/5) position[1] = 1;
-    //console.log(position[0]);
+    drawGenea();
+    ctx.drawImage(load.agamemnon,0,H/4-50,200,100);
+    ctx.drawImage(load.helene,W/4-50,H/4-50,200,100);
+    ctx.drawImage(load.achille,W/2-100,H/4-50,200,100);
+    ctx.drawImage(load.oreste,0,H/2-50,200,100);
+    ctx.drawImage(load.hermione,W/4-50,H/2-50,200,100);
+    ctx.drawImage(load.pyrrhus,W/2-100,H/2-50,200,100);
+    ctx.drawImage(load.andromaque,W/4*3-150,H/2-50,200,100);
+    ctx.drawImage(load.hector,W-200,H/2-50,200,100);
 }
 
 function slideG(){
