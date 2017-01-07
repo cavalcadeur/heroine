@@ -5,7 +5,7 @@ var Y = 0;
 var Widget;
 var square;
 var etoiles = [];
-var load = {masque:"masque",texte0:"texte0",texte1:"texte1",texte2:"texte2",texte3:"texte3",titre0:"titre0",titre1:"titre1"};
+var load = {masque:"masque",texte0:"texte0",texte1:"texte1",texte2:"texte2",texte3:"texte3",titre0:"titre0",titre1:"titre1",didon:"didon",achille:"achille",agamemnon:"agamemnon",amazone:"amazone",andromaque:"andromaque",antigone:"antigone",antiochus:"antiochus",ariane:"ariane",astyanax:"astyanax",berenice:"berenice",creon:"creon",didonImg:"didonImg",enee:"enee",hector:"hector",hemon:"hemon",hermione:"hermione",hyppolite:"hyppolite",jocaste:"jocaste",minos:"minos",oedipe:"oedipe",oreste:"oreste",pasiphae:"pasiphae",phedre:"phedre",pygmalion:"pygmalion",pyrrhus:"pyrrhus",roiTyr:"roiTyr",thesee:"thesee",titus:"titus"};
 var lettres = [];
 var constellations = [];
 var slide = 0;
@@ -30,7 +30,7 @@ function resize(){
 }
 
 function chargement(){
-    var list = ["masque","texte0","texte1","texte2","texte3","titre0","titre1"];
+    var list = ["masque","texte0","texte1","texte2","texte3","titre0","titre1","achille","agamemnon","ariane","astyanax","amazone","andromaque","antiochus","antigone","berenice","creon","didon","enee","didonImg","hector","hemon","hermione","hyppolite","jocaste","minos","oedipe","oreste","pasiphae","phedre","pygmalion","pyrrhus","roiTyr","thesee","titus"];
     var n = list.length;
     list.forEach(
         function (e){
@@ -81,37 +81,14 @@ function touching(x,y){
     else if (slide == 1){
         disalert();
         position = [100,0];
-        event = 2;
+        slide = 2;
     }
     else if (slide == 2){
-        if (event == 2){
-            position = [0,0];
-            event = 3;
-        }
-        else if (event == 4){
-            event = 5;
-        }
-        else if (event == 5){
-            event = 6;
-            position = [0,0];
-        }
-        else if (event == 7){
-            slide = 3;
-        }
+         slide = 3;
+         position = [[W/3,H/3,W/4,H/3*2,0],[W/3,H/3,W/2,H/3*2,0],[W/2,H/3*2,W/4*3,H/3*2,0]]
     }
     else if (slide == 3){
-        if (event == 7){
-            event += 1;
-            position = [-100,-200,-300,-400,-500];
-        }
-        else if (event == 8){
-            event += 1;
-            position = [100];
 
-        }
-        else if (event == 9){
-            slide += 1;
-        }
     }
     else if (slide == 4){
         slide = 5;
@@ -228,6 +205,7 @@ function drawB(){
 }
 
 function slideC(){
+    alert("Une femme de lignée royale");
     var f = function(t) {
         drawC(t);
         if (slide == 3) slideD();
@@ -238,57 +216,14 @@ function slideC(){
 
 function drawC(){
     drawFond();
-    if (event == 2) ctx.drawImage(load.astro,W/2-400,H/3-100);
-    else if (event == 3){
-        ctx.drawImage(load.astro,W/2-400,H/3-100);
-        ctx.globalAlpha = position[0];
-        ctx.drawImage(load.etyA,W/2-400 - position[1]*2,H/3-100+position[1]);
-        ctx.drawImage(load.etyB,W/2-400 + position[1]*2,H/3-100+position[1]);
-        position[0] += 0.01;
-        position[1] += 1;
-        if (position[0] >= 1) {
-            event = 4;
-        }
-        ctx.globalAlpha = 1;
-    }
-    else if (event == 4){
-        ctx.drawImage(load.astro,W/2-400,H/3-100);
-        ctx.drawImage(load.etyA,W/2-400 - position[1]*2,H/3-100+position[1]);
-        ctx.drawImage(load.etyB,W/2-400 + position[1]*2,H/3-100+position[1]);
-    }
-    else if (event == 5){
-        ctx.drawImage(load.astro,W/2-400,H/3-100);
-        ctx.drawImage(load.etyD,W/2-400,H/2-100);
-        ctx.drawImage(load.etyC,W/2-400,H/3*2-100);
-    }
-    else if (event == 6){
-        ctx.save();
-        ctx.translate(W/2,H/2);
-        ctx.scale(1-position[0]/30,1);
-        ctx.drawImage(load.astro,-400,H/3-100-H/2);
-        ctx.drawImage(load.etyD,-400,-100);
-        ctx.drawImage(load.etyC,-400,H/3*2-100-H/2);
-        ctx.restore();
-        position[0] += 1;
-        if (position[0] == 31) event = 7;
-    }
-    else if (event == 7){
-        ctx.save();
-        ctx.translate(W/2,H/2);
-        ctx.scale(1-position[0]/30,1);
-        ctx.drawImage(load.t1,-400,H/3-100-H/2);
-        ctx.drawImage(load.t2,-400,-100);
-        ctx.drawImage(load.t3,-400,H/3*2-100-H/2);
-        ctx.restore();
-        position[0] -= 1;
-        if (position[0] == -1) position[0] = 0;
-    }
+    ctx.globalAlpha = position[1]/100;
+    ctx.drawImage(load.didonImg,W/2-200,H/2-200,400,400);
+    ctx.globalAlpha = 1;
+    if (position[1] < 100)position[1] += 2;
 }
 
 function slideD(){
-    position[2] = 0;
-    position[3] = 0;
-    position[4] = 0;
+    disalert();
     var f = function(t) {
         drawD(t);
         if (slide == 4) slideE();
@@ -299,58 +234,24 @@ function slideD(){
 
 function drawD(){
     drawFond();
-    drawCons();
-    if (event == 7){
-        position[0] += 1;
-        if (position[0] == 50 && numbers.length > 10){
-            position[4] += rnd(2)+1;
-            var hh = rnd(numbers.length);
-            position[2] = numbers[hh];
-            var distance = W/6;
-            while (Math.hypot(etoiles[position[1]].x - etoiles[position[2]].x,etoiles[position[1]].y - etoiles[position[2]].y) > distance || position[1] == position[2]){
-                var hh = rnd(numbers.length);
-                position[2] = numbers[hh];
-                distance += 15;
-            }
-            numbers.splice(hh,1);
-            if (position[4] > 4){
-                position[2] = position[3];                
+    drawGenea();
+ctx.drawImage(load.roiTyr,W/3-125,H/3-50,250,100);
+ctx.drawImage(load.pygmalion,W/4-125,H/3*2-50,250,100);
+ctx.drawImage(load.enee,W/4*3-125,H/3*2-50,250,100);
+    ctx.drawImage(load.didon,W/2-125,H/3*2-50,250,100);
+}  
 
-            }
-            constellations.push({depart:position[1],fin:position[2],ach:0});
-            position[0] = -150;
-            position[1] = position[2] + 0;
-            if (position[4] > 5){
-                var hh = rnd(numbers.length);
-                position[1] = numbers[hh];
-                numbers.splice(hh,1);
-                position[3] = position[1];
-                position[4] = 0;
-            }
-        }
-    }
-    else if (event == 8){
-        ctx.globalAlpha = 1;
-        position.forEach(
-            function(e,i){
-                if (e < H/2){
-                    position[i] += 3;
-                }
-                ctx.drawImage(load["plan" + i],W/6 * (i+1) - 100,e-load["plan" + i].height / 2);
-
-            }
-        );
-    }
-    else if (event == 9){
-        position[0] -= 1;
-        if (position[0] == -1) position[0] = 0;
-        ctx.globalAlpha = position[0]/100;
-        for (var i = 0;i<5;i++){
-            ctx.drawImage(load["plan" + i],W/6 * (i+1) - 100,H/2-load["plan" + i].height / 2 + 2);
-        }
-        ctx.globalAlpha = 1 - position[0]/100;
-        ctx.drawImage(load.sunMoon,W/2 - 300,H/2 - 225);
-    }
+function drawGenea(){
+    position.forEach(
+        function (e){
+ctx.strokeStyle  = "rgb(255,255,255)";  
+           ctx.beginPath();
+           ctx.moveTo(e[0],e[1]);
+          ctx.lineTo(e[0] + (e[2]-e[0])*e[4]/100,e[1] + (e[3]-e[1])*e[4]/100);
+ctx.stroke();
+        if (e[4] <= 100) e[4] += 2;
+       }
+   );
 }
 
 function slideE(){
