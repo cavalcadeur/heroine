@@ -92,7 +92,7 @@ function touching(x,y){
     }
     else if (slide == 4){
         slide = 5;
-        position = [[100,H/4,100,H/2,0],[W/4+50,H/4,W/4+50,H/2,0],[W/2,H/4,W/2,H/2,0]];
+        position = [[100,H/4,100,H/2,0],[W/4+50,H/4,W/4+50,H/2,0],[W/2,H/4,W/2,H/2,0],[100,H/2,W/4+50,H/2,0],[W/4+50,H/2,W/2,H/2,0],[W/2,H/2,W/4*3-50,H/2,0],[W/4*3-50,H/2,W-100,H/2,0],[W/4*3 + W/8 - 75,H/2,W/4*3 + W/8 - 75,H/4*3,0]];
     }
     else if (slide == 5){
         slide = 6;
@@ -234,11 +234,13 @@ ctx.drawImage(load.enee,W/4*3-125,H/3*2-50,250,100);
 function drawGenea(){
     position.forEach(
         function (e){
-ctx.strokeStyle  = "rgb(255,255,255)";  
-           ctx.beginPath();
-           ctx.moveTo(e[0],e[1]);
-          ctx.lineTo(e[0] + (e[2]-e[0])*e[4]/100,e[1] + (e[3]-e[1])*e[4]/100);
-ctx.stroke();
+            if (e[2] >= 0){
+                ctx.strokeStyle  = "rgb(255,255,255)";  
+                ctx.beginPath();
+                ctx.moveTo(e[0],e[1]);
+                ctx.lineTo(e[0] + (e[2]-e[0])*e[4]/100,e[1] + (e[3]-e[1])*e[4]/100);
+                ctx.stroke();
+            }
         if (e[4] <= 100) e[4] += 2;
        }
    );
@@ -279,6 +281,7 @@ function drawF(){
     ctx.drawImage(load.pyrrhus,W/2-100,H/2-50,200,100);
     ctx.drawImage(load.andromaque,W/4*3-150,H/2-50,200,100);
     ctx.drawImage(load.hector,W-200,H/2-50,200,100);
+    ctx.drawImage(load.astyanax,W/4*3 + W/8 - 175,H/4*3-50,200,100);
 }
 
 function slideG(){
