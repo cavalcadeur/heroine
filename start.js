@@ -63,7 +63,8 @@ function start(){
     document.addEventListener(
         "keyup",
         function (event){
-            resize();            
+            resize();
+            if (event.keyCode == 32) alert("Merci Mallory pour ton commentaire !");
         }
     );
     console.log(W);
@@ -103,12 +104,26 @@ function touching(x,y){
     }
     else if (slide == 7){
         slide = 8;
+        position = [[W/4,H/4,W/2,H/4,0],[W/2,H/4,W/4,H/4,0],[W/8*3,H/4,W/2,H/2,-50],[W/8*3,H/4,W/4,H/2,-50],[W/2,H/2,W/4*3,H/2,-150]];
     }
     else if (slide == 8){
-        if (event == 12){
-            disalert();
-            event = 13;
-        }
+        slide = 9;
+        position = [[W/4,H/4,W/2,H/4,100],[W/8*3,H/4,W/2,H/2,100],[W/8*3,H/4,W/4,H/2,100],[W/2,H/2,W/4*3,H/2,0],[W/4*3,H/2,W,H/2,-100],[W/8*7,H/2,W/8*7,H/4*3,-150],[W/2,H/2,W/8*7,H/4*3,-250],[W/8*7-100,H/4*3-43,W/8*7-150,H/4*3-43,-350],[W/8*7-100,H/4*3-43,W/8*7-100,H/4*3-93,-350]];
+    }
+    else if (slide == 9){
+        slide = 10;
+    }
+    else if (slide == 10){
+        slide = 11;
+        position = [[100,H/4,100,H/2,0],[W/4+50,H/2,W/4+50,H/4,-200],[W/2,H/2,W/2,H/4,-300],[100,H/2,W/4+50,H/2,-100],[W/4+50,H/2,W/2,H/2,-200],[W/2,H/2,W/4*3-50,H/2,-300],[W/4*3-50,H/2,W-100,H/2,-400],[W/4*3 + W/8 - 75,H/2,W/4*3 + W/8 - 75,H/4*3,-450],[W/4-50,H/2,W/4-70,H/2-20,-550],[W/4-50,H/2,W/4-70,H/2+20,-550],[W/2-100,H/2,W/2-120,H/2-20,-550],[W/2-100,H/2,W/2-120,H/2+20,-550],[W/4*3-150,H/2,W/4*3-170,H/2-20,-550],[W/4*3-150,H/2,W/4*3-170,H/2+20,-550]];
+    }
+    
+    else if (slide == 11){
+        slide = 12;
+        position = [[W/4,H/3,W/2,H/3,0],[W/2,H/3,W/4,H/3,0],[W/8*3,H/3,W/8*3,H/3*2,-50],[W/4*3,H/3,W/4*3,H/3*2,-100]];
+    }
+    else if (slide == 12){
+        slide = 13;
     }
 }
 
@@ -311,42 +326,103 @@ function drawH(){
 
 function slideI(){
     alert("Ariane");
-    position = [];
-    constellations = [];
     var f = function(t) {
         drawI(t);
-        window.requestAnimationFrame(f);
+        if (slide == 9) slideJ();
+        else window.requestAnimationFrame(f);
     };
     window.requestAnimationFrame(f);
 }
 
 function drawI(){
     drawFond();
-    if (event == 13){
-        ctx.drawImage(load.final,0,0,W,H);
-    }
+    drawGenea();
+    ctx.drawImage(load.phedre,W/4-100,H/2-50,200,100);
+    ctx.drawImage(load.ariane,W/2-100,H/2-50,200,100);
+    ctx.drawImage(load.thesee,W/4*3-100,H/2-50,200,100);
+    ctx.drawImage(load.minos,W/2-100,H/4-50,200,100);
+    ctx.drawImage(load.pasiphae,W/4-100,H/4-50,200,100);
 }
 
-function drawCons(){
-    ctx.strokeStyle = "rgb(255,255,250)";
-    ctx.globalAlpha = 0.6;
-    constellations.forEach(
-        function (e){
-            if (event == 7){
-                if (e.ach < 100)e.ach += 0.5;
-            }
-            else {
-                if (e.ach > 0)e.ach -= 1;
-                if (e.ach < 0) e.ach = 0;
-            }
-            ctx.beginPath();
-            ctx.moveTo(etoiles[e.depart].x,etoiles[e.depart].y);
-            ctx.lineTo(etoiles[e.depart].x + (etoiles[e.fin].x - etoiles[e.depart].x)*(e.ach/100),etoiles[e.depart].y + (etoiles[e.fin].y - etoiles[e.depart].y)*(e.ach/100));
-            ctx.closePath();
-            ctx.stroke();
-        }
-    );
+function slideJ(){
+    alert("Phedre");
+    var f = function(t) {
+        drawJ(t);
+        if (slide == 10) slideK();
+        else window.requestAnimationFrame(f);
+    };
+    window.requestAnimationFrame(f);
+}
 
+function drawJ(){
+    drawFond();
+    drawGenea();
+    ctx.drawImage(load.ariane,W/4-100,H/2-50,200,100);
+    ctx.drawImage(load.phedre,W/2-100,H/2-50,200,100);
+    ctx.drawImage(load.thesee,W/4*3-100,H/2-50,200,100);
+    ctx.drawImage(load.hyppolite,W/8*7-100,H/4*3-50,200,100);
+    ctx.drawImage(load.minos,W/2-100,H/4-50,200,100);
+    ctx.drawImage(load.pasiphae,W/4-100,H/4-50,200,100);
+}
+
+function slideK(){
+    alert("La mort");
+    var f = function(t) {
+        drawK(t);
+        if (slide == 11) slideL();
+        else window.requestAnimationFrame(f);
+    };
+    window.requestAnimationFrame(f);
+}
+
+function drawK(){
+    drawFond();
+}
+
+function slideL(){
+    alert("Hermione");
+    var f = function(t) {
+        drawL(t);
+        if (slide == 12) slideM();
+        else window.requestAnimationFrame(f);
+    };
+    window.requestAnimationFrame(f);
+}
+
+function drawL(){
+    drawFond();
+    drawGenea();
+    drawGenea();
+    ctx.drawImage(load.agamemnon,0,H/4-50,200,100);
+    ctx.drawImage(load.helene,W/4-50,H/4-50,200,100);
+    ctx.drawImage(load.achille,W/2-100,H/4-50,200,100);
+    ctx.drawImage(load.oreste,0,H/2-50,200,100);
+    ctx.drawImage(load.hermione,W/4-50,H/2-50,200,100);
+    ctx.drawImage(load.pyrrhus,W/2-100,H/2-50,200,100);
+    ctx.drawImage(load.andromaque,W/4*3-150,H/2-50,200,100);
+    ctx.drawImage(load.hector,W-200,H/2-50,200,100);
+    ctx.drawImage(load.astyanax,W/4*3 + W/8 - 175,H/4*3-50,200,100);
+}
+
+
+function slideM(){
+    alert("Antigone");
+    var f = function(t) {
+        drawM(t);
+        if (slide == 13) slideM();
+        else window.requestAnimationFrame(f);
+    };
+    window.requestAnimationFrame(f);
+}
+
+function drawM(){
+    drawFond();
+    drawGenea();
+    ctx.drawImage(load.oedipe,W/4-100,H/3-50,200,100);
+    ctx.drawImage(load.jocaste,W/2-100,H/3-50,200,100);
+    ctx.drawImage(load.creon,W/4*3-100,H/3-50,200,100);
+    ctx.drawImage(load.antigone,W/8*3-100,H/3*2-50,200,100);
+    ctx.drawImage(load.hemon,W/4*3-100,H/3*2-50,200,100);
 }
 
 function drawFond() {
