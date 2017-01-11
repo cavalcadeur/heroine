@@ -96,23 +96,13 @@ function touching(x,y){
     }
     else if (slide == 5){
         slide = 6;
-        position = [[100,H/4,100,H/2,0],[W/4+50,H/2,W/4+50,H/4,-200],[W/2,H/2,W/2,H/4,-300],[100,H/2,W/4+50,H/2,-100],[W/4+50,H/2,W/2,H/2,-200],[W/2,H/2,W/4*3-50,H/2,-300],[W/4*3-50,H/2,W-100,H/2,-400],[W/4*3 + W/8 - 75,H/2,W/4*3 + W/8 - 75,H/4*3,-450],[W/4-50,H/2,W/4-70,H/2-20,-550],[W/4-50,H/2,W/4-70,H/2+20,-550],[W/2-100,H/2,W/2-120,H/2-20,-550],[W/2-100,H/2,W/2-120,H/2+20,-550],[W/4*3-150,H/2,W/4*3-170,H/2-20,-550],[W/4*3-150,H/2,W/4*3-170,H/2+20,-550]];
+        position = [[W/4,H/2,W/2,H/2,0],[W/4*3,H/2,W/2,H/2,0]];
     }
     else if (slide == 6){
-        if (event == 11){
-            disalert();
-            event = 12;
-        }
-        else if (event == 12){
-            slide = 7;
-        }
-
+        slide = 7;
     }
     else if (slide == 7){
-        if (event == 12){
-            disalert();
-            slide = 8;
-        }
+        slide = 8;
     }
     else if (slide == 8){
         if (event == 12){
@@ -236,7 +226,8 @@ function drawGenea(){
     position.forEach(
         function (e){
             if (e[4] >= 0){
-                ctx.strokeStyle  = "rgb(255,255,255)";  
+                ctx.strokeStyle  = "rgb(255,255,255)";
+                ctx.lineWidth = 5;
                 ctx.beginPath();
                 ctx.moveTo(e[0],e[1]);
                 ctx.lineTo(e[0] + (e[2]-e[0])*e[4]/100,e[1] + (e[3]-e[1])*e[4]/100);
@@ -287,8 +278,6 @@ function drawF(){
 
 function slideG(){
     alert("Berenice");
-    position = [W/2,H/2,0,0,0];
-    constellations = [];
     var f = function(t) {
         drawG(t);
         if (slide == 7) slideH();
@@ -300,14 +289,13 @@ function slideG(){
 function drawG(){
     drawFond();
     drawGenea();
-    ctx.drawImage(load.antiochus,0,H/2-50,200,100);
+    ctx.drawImage(load.antiochus,W/4-100,H/2-50,200,100);
     ctx.drawImage(load.berenice,W/2-100,H/2-50,200,100);
-    ctx.drawImage(load.titus,W-200,H/2-50,200,100);
+    ctx.drawImage(load.titus,W/4*3-100,H/2-50,200,100);
 }
 
 function slideH(){
-    position = [W/2,H/2,0,0,0];
-    constellations = [];
+    alert("Un amour inconditionnel");
     var f = function(t) {
         drawH(t);
         if (slide == 8) slideI();
@@ -318,13 +306,11 @@ function slideH(){
 
 function drawH(){
     drawFond();
-    ctx.drawImage(load.aristote,W/2-45,H/2-290);
-    ctx.drawImage(load.terre,W/2 - 100,H/2 - 100);
 }
 
 
 function slideI(){
-    alert("Conclusion");
+    alert("Ariane");
     position = [];
     constellations = [];
     var f = function(t) {
